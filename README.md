@@ -1,1 +1,1 @@
-Data_fitting
+DataFitting
