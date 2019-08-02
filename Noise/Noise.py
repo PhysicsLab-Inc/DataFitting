@@ -1,4 +1,6 @@
 from Funciones import *
+import matplotlib.pyplot as plt
+
 
 def Noise(func, args, intervalo, data_size, caos = 0.1, espaciado = 0, iter = 1):
 	'''Este método convierte una función analítica en "datos" que podrían haber salido de un laboratorio
@@ -35,7 +37,7 @@ def Noise(func, args, intervalo, data_size, caos = 0.1, espaciado = 0, iter = 1)
 	
 	for i in range(iter):
 		if espaciado == 0:
-			data_pos = np.sort(np.random.rand(data_size-2)* data_size)	
+			data_pos = np.sort(np.random.rand(data_size-2) * (abs(intervalo[0]) + abs(intervalo[-1])) - abs(intervalo[0]))	
 			np.insert(data_pos, 0, intervalo[0])
 			np.append(data_pos, intervalo[-1])							
 			
@@ -49,8 +51,10 @@ def Noise(func, args, intervalo, data_size, caos = 0.1, espaciado = 0, iter = 1)
 	
 	return Output
 
-	
-	
-	
-	
-	
+def plotter(Output):
+    Data = np.vstack(Output[0])
+    x = Data[:,0]
+    y = Data[:,1]
+    plt.figure(); plt.clf()
+    plt.plot(x,y,'.')
+    plt.show(True)
